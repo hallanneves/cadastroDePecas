@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Zen </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </h:head>
+
+    <h:body class="vsc-initialized">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#">Venda de peças</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <h:link class="nav-link" outcome="index">Lista de peças</h:link><span class="sr-only">(current)</span>
+                    </li>
+                    <li class="nav-item">
+                        <h:link class="nav-link" outcome="cadastro">Cadastro de peças</h:link><span class="sr-only">(current)</span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="container" style="margin-top: 90px">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>
+                        Lista de peças
+                    </h2>
+                    <p>
+                        Nessa tela você pode listar e apagar peças.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <h:dataTable class="table table-dark" value = "#{manager.pecas}" var = "peca">
+                        <h:column>    				
+                            <f:facet name = "header">Nome</f:facet>    				
+                                #{peca.nome}
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name = "header">Veículo de aplicação</f:facet>    				
+                                #{peca.veiculo}
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name = "header">Peso Líquido</f:facet> 
+                            <h:outputText value="#{peca.pesoLiquido}" >
+                                <f:convertNumber pattern="#0.00" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name = "header">Peso Bruto</f:facet>   
+                            <h:outputText value="#{peca.pesoBruto}" >
+                                <f:convertNumber pattern="#0.00" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name = "header">Ação</f:facet>   
+                            <h:form>
+                                <h:commandButton class="btn btn-danger btn-sm" value="Apagar" action="#{manager.removePeca(peca)}" />
+                            </h:form>
+                        </h:column>
+
+                        <button type="button" class="btn btn-danger">Danger</button>
+                    </h:dataTable>
+                </div>
+            </div>    
+
+        </main>
+
+    </h:body>
+</html>
+
